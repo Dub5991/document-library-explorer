@@ -15,6 +15,15 @@ npm run dev        # runs offline with seeded local data — no keys required
 
 Supabase activates automatically when `.env` keys are present (see `.env.example`).
 
+## Docker
+
+```bash
+docker build -t document-library-explorer .
+docker run -p 8080:80 document-library-explorer
+```
+
+Serves the production build at `http://localhost:8080` via nginx.
+
 ## Scripts
 
 | script       | purpose                                 |

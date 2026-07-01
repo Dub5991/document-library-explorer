@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.git
+cypress/videos
+cypress/screenshots
+.env
+.env.local
+.husky
