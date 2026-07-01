@@ -1,5 +1,8 @@
 # Document Library Explorer
 
+[![CI](https://github.com/Dub5991/document-library-explorer/actions/workflows/ci.yml/badge.svg)](https://github.com/Dub5991/document-library-explorer/actions/workflows/ci.yml)
+![coverage](https://img.shields.io/badge/coverage-90%25-brightgreen)
+
 **Live:** https://document-library-explorer.vercel.app
 
 Browse, search, filter, and update status on a document catalog.
