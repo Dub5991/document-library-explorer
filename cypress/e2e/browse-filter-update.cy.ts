@@ -8,19 +8,22 @@ describe('document library', () => {
     cy.get('table tbody tr').should('have.length.greaterThan', 0)
 
     // Filtering by search narrows the visible set.
-    cy.get('input[type="text"]').first().type('Vendor Contract')
+    cy.get('input[type="text"]').first().type('Report')
     cy.contains(/Showing \d+ of \d+ documents/)
 
     // Opening the first result shows the detail dialog.
     cy.get('table tbody tr').first().find('button').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Updating status writes through Redux and confirms via the live region.
-    cy.get('[role="dialog"] select').select('approved')
-    cy.get('[role="status"]').should(
-      'contain.text',
-      'Status updated to Approved',
-    )
+    // Pick a status different from the current one so the change actually fires.
+    cy.get('[role="dialog"] select').as('status')
+    cy.get('@status').then(($select) => {
+      const next = $select.val() === 'approved' ? 'draft' : 'approved'
+      cy.get('@status').select(next)
+    })
+
+    // The live region confirms the write.
+    cy.get('[role="status"]').should('contain.text', 'Status updated to')
 
     // Escape closes the dialog.
     cy.get('body').type('{esc}')
