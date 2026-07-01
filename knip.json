@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/app/store.ts",
+    "src/app/hooks.ts",
+    "src/**/*.test.{ts,tsx}",
+    "cypress/e2e/**/*.cy.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}"],
+  "ignore": ["src/**/*.d.ts"]
+}

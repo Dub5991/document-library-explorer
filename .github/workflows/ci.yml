@@ -1,4 +1,4 @@
-# CI: typecheck, lint, format, coverage-gated unit tests, a11y, e2e, build — every push/PR to main.
+# CI: typecheck, lint, format, coverage-gated tests, a11y, slop sweep, e2e, build — every push/PR.
 name: CI
 
 on:
@@ -25,6 +25,7 @@ jobs:
       - run: npm run format:check
       - run: npm run test:coverage
       - run: npm run test:a11y
+      - run: npm run slop
 
       - name: e2e (Cypress)
         uses: cypress-io/github-action@v6

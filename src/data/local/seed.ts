@@ -93,7 +93,7 @@ function pastIsoDate(rng: () => number, daysAgoMax: number): string {
   return new Date(1735689600000 - ms).toISOString()
 }
 
-export function generateDocuments(count: number, seed = 42): Document[] {
+function generateDocuments(count: number, seed = 42): Document[] {
   const rng = createRng(seed)
   const documents: Document[] = []
 

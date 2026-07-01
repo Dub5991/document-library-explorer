@@ -1,9 +1,10 @@
-// TS + React Hooks + jsx-a11y lint rules, Prettier last to win formatting.
+// TS + React Hooks + jsx-a11y + slop-tier rules, Prettier last to win formatting.
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
+import vitest from '@vitest/eslint-plugin'
 import tseslint from 'typescript-eslint'
 import prettier from 'eslint-config-prettier'
 
@@ -30,6 +31,17 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // Slop tier: no debug leftovers, no escape hatches beyond what's already banned.
+      'no-console': ['error', { allow: ['error'] }],
+      'no-debugger': 'error',
+    },
+  },
+  // Theater-test guard: every test must assert.
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    plugins: { vitest },
+    rules: {
+      'vitest/expect-expect': 'error',
     },
   },
   prettier,

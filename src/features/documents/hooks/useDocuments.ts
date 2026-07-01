@@ -35,9 +35,9 @@ export function useDocuments(query: DocumentQuery): UseDocumentsResult {
   useEffect(() => {
     let cancelled = false
 
-    dataSource
-      .listDocuments(query)
-      .then((page) => {
+    async function load() {
+      try {
+        const page = await dataSource.listDocuments(query)
         if (cancelled) return
         setState({
           queryKey,
@@ -45,8 +45,7 @@ export function useDocuments(query: DocumentQuery): UseDocumentsResult {
           total: page.total,
           error: null,
         })
-      })
-      .catch((err: unknown) => {
+      } catch (err: unknown) {
         if (cancelled) return
         setState({
           queryKey,
@@ -55,8 +54,13 @@ export function useDocuments(query: DocumentQuery): UseDocumentsResult {
           error:
             err instanceof Error ? err.message : 'Failed to load documents',
         })
-      })
+      }
+    }
 
+    void load()
+
+    // `cancelled` guards against a resolved request writing state after the
+    // query changed or the component unmounted (stale-response race).
     return () => {
       cancelled = true
     }

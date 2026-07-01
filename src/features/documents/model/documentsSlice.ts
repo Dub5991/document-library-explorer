@@ -4,7 +4,7 @@ import { dataSource } from '../../../data/provider'
 import type { Status } from '../../../shared/types/status'
 import type { RootState } from '../../../app/store'
 
-export type DocumentsState = {
+type DocumentsState = {
   statusById: Record<string, Status>
   updating: Record<string, boolean>
   error: string | null

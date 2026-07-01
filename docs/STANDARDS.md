@@ -90,15 +90,17 @@ messages, or docs states why this project exists or ties it to any specific role
 ### Audit ritual (run before any merge to main)
 
 ```bash
-npx tsc --noEmit          # types + contract conformance
-npm run lint               # style + rules
-npm run test -- --coverage # unit/component, coverage not down
-npm run test:a11y          # accessibility assertions
-npm run build               # production build compiles
-git diff --stat             # read what actually changed
+npm run typecheck     # types + contract conformance
+npm run lint          # style + slop-tier rules
+npm run test:coverage # unit/component, coverage threshold enforced
+npm run test:a11y     # accessibility assertions
+npm run build         # production build compiles
+npm run slop          # anti-slop sweep: greps + knip + jscpd (see docs/ANTI_SLOP.md)
+git diff --stat       # read what actually changed
 ```
 
-All six pass, or the merge does not happen.
+All pass, or the merge does not happen. `npm run verify` chains the first six.
+The slop tier (texture) is defined in `docs/ANTI_SLOP.md`.
 
 ---
 
