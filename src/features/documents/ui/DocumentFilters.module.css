@@ -1,30 +1,35 @@
+/* Streamlined horizontal filter row that wraps on narrow viewports. */
 .filters {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: var(--space-4);
+  margin-bottom: var(--space-4);
 }
 
 .group {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
   margin: 0;
-  padding: var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  padding: 0;
+  border: 0;
 }
 
 .legend {
   font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-text);
-  padding: 0 var(--space-1);
+  padding: 0;
+  margin-right: var(--space-1);
+  float: left;
 }
 
 .option {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-base);
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
   color: var(--color-text);
 }

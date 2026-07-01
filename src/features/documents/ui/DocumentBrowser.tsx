@@ -3,9 +3,11 @@ import { useState } from 'react'
 import { useDocumentQuery } from '../hooks/useDocumentQuery'
 import { useDocuments } from '../hooks/useDocuments'
 import { useFilterOptions } from '../hooks/useFilterOptions'
+import { DocumentSearch } from './DocumentSearch'
 import { DocumentFilters } from './DocumentFilters'
 import { DocumentTable } from './DocumentTable'
 import { DocumentDetail } from './DocumentDetail'
+import styles from './DocumentBrowser.module.css'
 
 export function DocumentBrowser() {
   const query = useDocumentQuery()
@@ -15,19 +17,24 @@ export function DocumentBrowser() {
 
   return (
     <div>
-      <DocumentFilters
-        search={query.filters.search}
-        onSearchChange={query.setSearch}
-        folders={folders}
-        folderId={query.filters.folderId}
-        onFolderChange={query.setFolder}
-        selectedStatuses={query.filters.statuses}
-        onToggleStatus={query.toggleStatus}
-        tags={tags}
-        selectedTagIds={query.filters.tagIds}
-        onToggleTag={query.toggleTag}
-        onReset={query.reset}
-      />
+      <div className={styles.controls}>
+        <DocumentSearch
+          value={query.filters.search}
+          onChange={query.setSearch}
+          onOpen={setOpenId}
+        />
+        <DocumentFilters
+          folders={folders}
+          folderId={query.filters.folderId}
+          onFolderChange={query.setFolder}
+          selectedStatuses={query.filters.statuses}
+          onToggleStatus={query.toggleStatus}
+          tags={tags}
+          selectedTagIds={query.filters.tagIds}
+          onToggleTag={query.toggleTag}
+          onReset={query.reset}
+        />
+      </div>
       <DocumentTable
         items={items}
         total={total}

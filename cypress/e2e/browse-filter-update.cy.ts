@@ -7,9 +7,10 @@ describe('document library', () => {
     cy.contains(/Showing \d+ of \d+ documents/)
     cy.get('table tbody tr').should('have.length.greaterThan', 0)
 
-    // Filtering by search narrows the visible set.
+    // Filtering by search narrows the visible set; Escape dismisses the typeahead.
     cy.get('input[type="text"]').first().type('Report')
     cy.contains(/Showing \d+ of \d+ documents/)
+    cy.get('input[type="text"]').first().type('{esc}')
 
     // Opening the first result shows the detail dialog.
     cy.get('table tbody tr').first().find('button').click()

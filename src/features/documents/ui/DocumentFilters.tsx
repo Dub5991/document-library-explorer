@@ -1,6 +1,5 @@
-// Controlled filter panel: renders search/folder/status/tag controls; owns no state itself.
+// Controlled filter row: folder, status, and tag controls; owns no state itself.
 import { Button } from '../../../shared/ui/Button/Button'
-import { Field } from '../../../shared/ui/Field/Field'
 import { Select } from '../../../shared/ui/Select/Select'
 import type { Folder } from '../../../shared/types/folder'
 import type { Status } from '../../../shared/types/status'
@@ -13,8 +12,6 @@ const STATUS_ORDER: Status[] = ['draft', 'review', 'approved', 'archived']
 const ALL_FOLDERS_VALUE = ''
 
 type DocumentFiltersProps = {
-  search: string
-  onSearchChange: (value: string) => void
   folders: Folder[]
   folderId: string | null
   onFolderChange: (id: string | null) => void
@@ -27,8 +24,6 @@ type DocumentFiltersProps = {
 }
 
 export function DocumentFilters({
-  search,
-  onSearchChange,
   folders,
   folderId,
   onFolderChange,
@@ -46,12 +41,6 @@ export function DocumentFilters({
 
   return (
     <div className={styles.filters}>
-      <Field
-        label="Search"
-        value={search}
-        onChange={(event) => onSearchChange(event.target.value)}
-      />
-
       <Select
         label="Folder"
         value={folderId ?? ALL_FOLDERS_VALUE}

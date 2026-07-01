@@ -1,0 +1,7 @@
+/* Search sits prominent on top; the filter row streamlines beneath it. */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}

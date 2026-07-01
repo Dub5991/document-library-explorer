@@ -1,4 +1,4 @@
-// Verifies the controlled filter panel renders controls and forwards user intent to callbacks.
+// Verifies the controlled filter row renders controls and forwards user intent to callbacks.
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe } from 'jest-axe'
@@ -20,8 +20,6 @@ function renderFilters(
   overrides: Partial<Parameters<typeof DocumentFilters>[0]> = {},
 ) {
   const props = {
-    search: '',
-    onSearchChange: vi.fn(),
     folders,
     folderId: null,
     onFolderChange: vi.fn(),
@@ -37,20 +35,13 @@ function renderFilters(
   return props
 }
 
-test('renders search, folder, status, and tag controls', () => {
+test('renders folder, status, and tag controls', () => {
   renderFilters()
-  expect(screen.getByLabelText('Search')).toBeInTheDocument()
   expect(screen.getByLabelText('Folder')).toBeInTheDocument()
   expect(
     screen.getByRole('checkbox', { name: 'In Review' }),
   ).toBeInTheDocument()
   expect(screen.getByRole('checkbox', { name: 'Urgent' })).toBeInTheDocument()
-})
-
-test('typing in search calls onSearchChange', async () => {
-  const { onSearchChange } = renderFilters()
-  await userEvent.type(screen.getByLabelText('Search'), 'x')
-  expect(onSearchChange).toHaveBeenCalledWith('x')
 })
 
 test('checking a status calls onToggleStatus with that status', async () => {
@@ -80,8 +71,6 @@ test('Reset button calls onReset', async () => {
 test('has no accessibility violations', async () => {
   const { container } = render(
     <DocumentFilters
-      search=""
-      onSearchChange={() => {}}
       folders={folders}
       folderId={null}
       onFolderChange={() => {}}
