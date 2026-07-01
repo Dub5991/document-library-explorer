@@ -57,3 +57,15 @@ test('updateStatus mutates status and updatedAt, and persists across calls', asy
   const refetched = await localDataSource.getDocument('doc-1')
   expect(refetched.status).toBe('archived')
 })
+
+test('listFolders returns the seeded folder set', async () => {
+  const folders = await localDataSource.listFolders()
+  expect(folders.length).toBeGreaterThan(0)
+  expect(folders.every((f) => typeof f.name === 'string')).toBe(true)
+})
+
+test('listTags returns the seeded tag set', async () => {
+  const tags = await localDataSource.listTags()
+  expect(tags.length).toBeGreaterThan(0)
+  expect(tags.every((t) => typeof t.name === 'string')).toBe(true)
+})

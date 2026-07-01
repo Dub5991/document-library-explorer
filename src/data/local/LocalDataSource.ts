@@ -1,7 +1,9 @@
 // Offline DataSource impl: filters/sorts/paginates the in-memory seed, no network.
 import type { DataSource, DocumentQuery, Page } from '../DataSource'
 import type { Document } from '../../shared/types/document'
-import { SEED_DOCUMENTS } from './seed'
+import type { Folder } from '../../shared/types/folder'
+import type { Tag } from '../../shared/types/tag'
+import { FOLDERS, SEED_DOCUMENTS, TAGS } from './seed'
 
 const documents: Document[] = SEED_DOCUMENTS.map((doc) => ({ ...doc }))
 
@@ -69,5 +71,13 @@ export const localDataSource: DataSource = {
     doc.status = status
     doc.updatedAt = new Date().toISOString()
     return doc
+  },
+
+  async listFolders(): Promise<Folder[]> {
+    return FOLDERS.map((folder) => ({ ...folder }))
+  },
+
+  async listTags(): Promise<Tag[]> {
+    return TAGS.map((tag) => ({ ...tag }))
   },
 }
