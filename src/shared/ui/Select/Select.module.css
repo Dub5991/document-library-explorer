@@ -6,11 +6,6 @@
   composes: label from '../formControl.module.css';
 }
 
-.input {
+.select {
   composes: control from '../formControl.module.css';
-}
-
-.error {
-  font-size: var(--font-size-sm);
-  color: #b91c1c;
 }
