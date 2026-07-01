@@ -7,7 +7,13 @@ type FieldProps = InputHTMLAttributes<HTMLInputElement> & {
   error?: string
 }
 
-export function Field({ label, error, id, ...rest }: FieldProps) {
+export function Field({
+  label,
+  error,
+  id,
+  type = 'text',
+  ...rest
+}: FieldProps) {
   const generatedId = useId()
   const inputId = id ?? generatedId
   const errorId = `${inputId}-error`
@@ -19,6 +25,7 @@ export function Field({ label, error, id, ...rest }: FieldProps) {
       </label>
       <input
         id={inputId}
+        type={type}
         className={styles.input}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
