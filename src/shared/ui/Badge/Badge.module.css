@@ -1,0 +1,28 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.draft {
+  background: var(--color-status-draft-bg);
+  color: var(--color-status-draft-text);
+}
+
+.review {
+  background: var(--color-status-review-bg);
+  color: var(--color-status-review-text);
+}
+
+.approved {
+  background: var(--color-status-approved-bg);
+  color: var(--color-status-approved-text);
+}
+
+.archived {
+  background: var(--color-status-archived-bg);
+  color: var(--color-status-archived-text);
+}

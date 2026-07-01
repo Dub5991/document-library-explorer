@@ -1,8 +1,18 @@
-/* Bare reset. Real design tokens land in the TOKENS + PRIMITIVES station. */
+/* Global reset + base typography, wired to tokens.css. */
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
