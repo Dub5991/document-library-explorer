@@ -72,12 +72,11 @@ enhancement, never a hard dependency.
 
 ### 1.8 Scope drift
 
-Only features in the Definition of Done get built. Nothing in code, comments, commit
-messages, or docs states why this project exists or ties it to any specific role.
+Only features in the Definition of Done get built. The repository describes the software
+on its own terms and never names external context it does not need.
 
-- **Detect:** `grep -rni "job\|recruiter\|hiring\|position\|req " . --include=*.ts* --include=*.md`
-  returns nothing meaningful. New features not on the DoD list are rejected or added
-  deliberately.
+- **Detect:** `npm run slop` sweeps for out-of-scope references; new features not on the
+  DoD list are rejected or added deliberately.
 - **Cadence:** every commit message, and a full-repo sweep before final delivery.
 
 ### 1.9 Green-main drift
@@ -172,9 +171,8 @@ A build slice ships only when ALL are true:
 
 ## 3. Repository Signals
 
-These turn a working app into a hiring signal. Each is a real artifact a technical
-reviewer looks for. None of them names the reason it exists — the professionalism _is_
-the message.
+These turn a working app into a repository worth reading. Each is a real artifact a
+technical reviewer looks for, and each stands on its own engineering merit.
 
 ### 3.1 Commit history
 
@@ -213,7 +211,7 @@ agile, ticket-driven workflow without a word of explanation.
 ### 3.7 Accessibility statement
 
 A short `docs/accessibility.md`: WCAG target, keyboard map, how a11y is tested. Rare in
-portfolio projects; immediately noticed by anyone who values it.
+comparable projects; immediately noticed by anyone who values it.
 
 ### 3.8 A design artifact
 
