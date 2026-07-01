@@ -1,11 +1,16 @@
-// Root component. Real routing/layout lands in later BUILD station slices.
-import { DocumentTable } from './features/documents/ui/DocumentTable'
+// Root component: the document browser is the whole app surface for now.
+import { DocumentBrowser } from './features/documents/ui/DocumentBrowser'
+import styles from './App.module.css'
 
 function App() {
   return (
-    <div>
-      <h1>Document Library Explorer</h1>
-      <DocumentTable />
+    <div className={styles.app}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Document Library Explorer</h1>
+      </header>
+      <main>
+        <DocumentBrowser />
+      </main>
     </div>
   )
 }

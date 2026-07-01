@@ -1,0 +1,14 @@
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+}
+
+.header {
+  margin-bottom: var(--space-5);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  margin: 0;
+}

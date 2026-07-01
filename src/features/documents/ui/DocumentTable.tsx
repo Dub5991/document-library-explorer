@@ -1,6 +1,5 @@
-// Slice 1: sortable document list table — read-only, no filters/detail view yet.
-import { useState } from 'react'
-import { useDocuments } from '../hooks/useDocuments'
+// Presentational document list: sortable headers + rows. All data/state is passed in.
+import type { Document } from '../../../shared/types/document'
 import type { SortField } from '../../../data/DataSource'
 import { Table } from '../../../shared/ui/Table/Table'
 import { SortableColumnHeader } from '../../../shared/ui/Table/SortableColumnHeader'
@@ -8,7 +7,7 @@ import { Badge } from '../../../shared/ui/Badge/Badge'
 import { formatDate } from '../../../shared/lib/formatDate'
 import styles from './DocumentTable.module.css'
 
-type SortState = { field: SortField; direction: 'ascending' | 'descending' }
+type Sort = { field: SortField; direction: 'ascending' | 'descending' }
 
 const COLUMNS: Array<{ field: SortField; label: string }> = [
   { field: 'title', label: 'Title' },
@@ -16,29 +15,28 @@ const COLUMNS: Array<{ field: SortField; label: string }> = [
   { field: 'updatedAt', label: 'Updated' },
 ]
 
-export function DocumentTable() {
-  const [sort, setSort] = useState<SortState>({
-    field: 'title',
-    direction: 'ascending',
-  })
+type DocumentTableProps = {
+  items: Document[]
+  total: number
+  loading: boolean
+  error: string | null
+  sort: Sort
+  onSort: (field: SortField) => void
+  onOpen: (id: string) => void
+}
 
-  const { items, total, loading, error } = useDocuments({ sort })
-
-  function handleSort(field: SortField) {
-    setSort((current) =>
-      current.field === field
-        ? {
-            field,
-            direction:
-              current.direction === 'ascending' ? 'descending' : 'ascending',
-          }
-        : { field, direction: 'ascending' },
-    )
-  }
-
+export function DocumentTable({
+  items,
+  total,
+  loading,
+  error,
+  sort,
+  onSort,
+  onOpen,
+}: DocumentTableProps) {
   return (
     <div>
-      <p className={styles.summary}>
+      <p className={styles.summary} aria-live="polite">
         {loading ? 'Loading…' : `Showing ${items.length} of ${total} documents`}
       </p>
 
@@ -50,6 +48,7 @@ export function DocumentTable() {
 
       {!error && (
         <Table>
+          <caption className={styles.caption}>Document catalog</caption>
           <thead>
             <tr>
               {COLUMNS.map((column) => (
@@ -57,7 +56,7 @@ export function DocumentTable() {
                   key={column.field}
                   label={column.label}
                   sort={sort.field === column.field ? sort.direction : 'none'}
-                  onSort={() => handleSort(column.field)}
+                  onSort={() => onSort(column.field)}
                 />
               ))}
             </tr>
@@ -72,7 +71,16 @@ export function DocumentTable() {
             )}
             {items.map((doc) => (
               <tr key={doc.id}>
-                <td>{doc.title}</td>
+                <td>
+                  {/* A button (not a row click) keeps opening keyboard-operable. */}
+                  <button
+                    type="button"
+                    className={styles.titleButton}
+                    onClick={() => onOpen(doc.id)}
+                  >
+                    {doc.title}
+                  </button>
+                </td>
                 <td>
                   <Badge status={doc.status} />
                 </td>
