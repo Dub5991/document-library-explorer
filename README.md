@@ -42,3 +42,29 @@ Serves the production build at `http://localhost:8080` via nginx.
 | e2e           | cypress end-to-end (headless)                    |
 | e2e:open      | cypress interactive runner                       |
 | verify        | typecheck + lint + format + coverage + a11y (CI) |
+
+## Documentation
+
+- [Architecture](docs/architecture.md) — the contract-behind-two-implementations structure.
+- [Workflow](docs/workflow.md) — the browse → filter → open → update-status flow.
+- [Accessibility](docs/accessibility.md) — WCAG 2.1 AA target, keyboard map, enforcement.
+- ADRs:
+  [0001 DataSource contract](docs/adr/0001-datasource-contract.md) ·
+  [0002 Owned primitives](docs/adr/0002-owned-primitives.md) ·
+  [0003 Redux write path](docs/adr/0003-redux-write-path.md)
+- [CHANGELOG](CHANGELOG.md) — the build arc in Keep a Changelog format.
+
+## Maintaining and extending
+
+To add a data capability, add the method to the `DataSource` interface
+(`src/data/DataSource.ts`), implement it in both `LocalDataSource`
+(`src/data/local/`) and `SupabaseDataSource` (`src/data/supabase/`), cover it with a
+colocated test, and keep the swap test green — the same UI actions must produce identical
+results on both implementations. TypeScript enforces that a method on one implementation
+exists on the other.
+
+The tree is organized by responsibility: `features/` holds screen logic grouped by feature
+(each with its own `ui/`, `hooks/`, `model/`); `shared/` holds owned UI primitives, tokens,
+and types used across features; `data/` holds the contract, the provider seam, and the two
+implementations; `app/` holds the store and app-level wiring. A feature never imports
+another feature's internals — shared code moves to `shared/`.
