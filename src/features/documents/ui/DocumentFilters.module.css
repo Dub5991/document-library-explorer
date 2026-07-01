@@ -20,7 +20,7 @@
 .legend {
   font-size: var(--font-size-sm);
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--text);
   padding: 0;
   margin-right: var(--space-1);
   float: left;
@@ -31,5 +31,5 @@
   align-items: center;
   gap: var(--space-1);
   font-size: var(--font-size-sm);
-  color: var(--color-text);
+  color: var(--text);
 }

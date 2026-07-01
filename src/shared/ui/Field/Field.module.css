@@ -12,5 +12,5 @@
 
 .error {
   font-size: var(--font-size-sm);
-  color: #b91c1c;
+  color: var(--danger);
 }

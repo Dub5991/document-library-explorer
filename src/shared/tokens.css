@@ -1,60 +1,95 @@
-/* Design tokens: color, space, type. All text/border pairs verified AA (4.5:1). */
+/* Editorial-archival design tokens. Three layers: primitives → semantic roles →
+   the stable names components already reference. Nothing hardcodes a value past here. */
 :root {
-  --color-bg: #ffffff;
-  --color-surface: #f7f7f8;
-  --color-border: #d4d4d8;
-  --color-text: #18181b;
-  --color-text-muted: #52525b;
-  --color-accent: #1d4ed8;
-  --color-accent-text: #ffffff;
-  --color-focus-ring: #1d4ed8;
+  /* Layer 1: primitives — raw OKLCH ramps, never referenced by components directly. */
+  --paper-50: oklch(0.99 0.004 85);
+  --paper-100: oklch(0.975 0.005 85);
+  --paper-200: oklch(0.945 0.006 85);
+  --ink-900: oklch(0.22 0.012 260);
+  --ink-500: oklch(0.52 0.01 260);
+  --ink-300: oklch(0.7 0.008 260);
+  --teal-600: oklch(0.52 0.095 195);
+  --teal-700: oklch(0.46 0.1 195);
+  --teal-400: oklch(0.62 0.11 195);
+  --green-600: oklch(0.58 0.08 155);
+  --amber-500: oklch(0.74 0.1 75);
+  --slate-500: oklch(0.6 0.03 240);
+  --danger-600: oklch(0.55 0.15 25);
 
-  --color-status-draft-bg: #f4f4f5;
-  --color-status-draft-text: #3f3f46;
-  --color-status-review-bg: #fef3c7;
-  --color-status-review-text: #78350f;
-  --color-status-approved-bg: #dcfce7;
-  --color-status-approved-text: #14532d;
-  --color-status-archived-bg: #e4e4e7;
-  --color-status-archived-text: #27272a;
+  /* Layer 2: semantic roles — what components reference. */
+  --bg: var(--paper-50);
+  --bg-raised: var(--paper-100);
+  --bg-sunken: var(--paper-200);
+  --text: var(--ink-900);
+  --text-muted: var(--ink-500);
+  --text-faint: var(--ink-300);
+  --hairline: oklch(0.9 0.006 85);
+  --accent: var(--teal-600);
+  --accent-hover: var(--teal-700);
+  --accent-text: var(--paper-50);
+  --danger: var(--danger-600);
+  --focus-ring: oklch(0.55 0.14 195);
 
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
+  /* Status hues share one scale; the Badge tints these against paper. */
+  --status-neutral: var(--ink-500);
+  --status-active: var(--green-600);
+  --status-review: var(--amber-500);
+  --status-archived: var(--slate-500);
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-size-sm: 13px;
-  --font-size-base: 15px;
-  --font-size-lg: 18px;
-  --line-height-base: 1.4;
+  /* Type — Fraunces for display, Geist for UI, Geist Mono for tabular figures. */
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-ui: 'Geist Variable', system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+
+  /* Fluid type ramp (clamp, not stepped breakpoints). */
+  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.875rem);
+  --step-0: clamp(0.94rem, 0.9rem + 0.2vw, 1rem);
+  --step-1: clamp(1.13rem, 1.05rem + 0.4vw, 1.33rem);
+  --step-2: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+  --step-3: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+
+  /* Legacy size names kept stable, remapped onto the fluid ramp. */
+  --font-size-sm: var(--step--1);
+  --font-size-base: var(--step-0);
+  --font-size-lg: var(--step-1);
+  --line-height-base: 1.5;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
 
   --radius-sm: 4px;
   --radius-md: 6px;
+  --radius-lg: 10px;
 
-  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-focus-ring);
+  --elevation-1: 0 1px 2px oklch(0.22 0.012 260 / 0.06);
+  --elevation-2: 0 4px 16px oklch(0.22 0.012 260 / 0.1);
+  --scrim: oklch(0.22 0.012 260 / 0.4);
+
+  --motion-fast: 120ms;
+  --motion: 160ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
+/* Dark mode — inverted ink/paper, brighter teal so the accent holds contrast. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #18181b;
-    --color-surface: #27272a;
-    --color-border: #3f3f46;
-    --color-text: #f4f4f5;
-    --color-text-muted: #a1a1aa;
-    --color-accent: #60a5fa;
-    --color-accent-text: #0b1220;
-    --color-focus-ring: #60a5fa;
-
-    --color-status-draft-bg: #3f3f46;
-    --color-status-draft-text: #e4e4e7;
-    --color-status-review-bg: #78350f;
-    --color-status-review-text: #fef3c7;
-    --color-status-approved-bg: #14532d;
-    --color-status-approved-text: #dcfce7;
-    --color-status-archived-bg: #3f3f46;
-    --color-status-archived-text: #e4e4e7;
+    --bg: oklch(0.2 0.01 260);
+    --bg-raised: oklch(0.24 0.01 260);
+    --bg-sunken: oklch(0.17 0.01 260);
+    --text: oklch(0.94 0.005 85);
+    --text-muted: oklch(0.72 0.008 260);
+    --text-faint: oklch(0.55 0.01 260);
+    --hairline: oklch(0.32 0.01 260);
+    --accent: var(--teal-400);
+    --accent-hover: oklch(0.68 0.11 195);
+    --accent-text: oklch(0.17 0.01 260);
+    --focus-ring: oklch(0.7 0.13 195);
+    --scrim: oklch(0.12 0.01 260 / 0.6);
   }
 }

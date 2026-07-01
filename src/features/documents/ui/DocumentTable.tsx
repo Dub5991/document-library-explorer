@@ -84,7 +84,7 @@ export function DocumentTable({
                 <td>
                   <Badge status={doc.status} />
                 </td>
-                <td>{formatDate(doc.updatedAt)}</td>
+                <td className={styles.mono}>{formatDate(doc.updatedAt)}</td>
               </tr>
             ))}
           </tbody>

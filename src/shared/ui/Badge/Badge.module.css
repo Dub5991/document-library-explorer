@@ -1,28 +1,43 @@
+/* Status pill: a faint status tint carries the hue, ink text carries the label.
+   Text stays --text (AA on paper) so status never rides on color alone (WCAG 1.4.1). */
 .badge {
   display: inline-flex;
   align-items: center;
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.01em;
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border-radius: 999px;
+  color: var(--text);
+  border: 1px solid var(--hairline);
+}
+
+/* The dot restates status for quick scanning without leaning on it semantically. */
+.badge::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--dot);
 }
 
 .draft {
-  background: var(--color-status-draft-bg);
-  color: var(--color-status-draft-text);
+  --dot: var(--status-neutral);
+  background: color-mix(in oklch, var(--status-neutral) 8%, var(--bg));
 }
 
 .review {
-  background: var(--color-status-review-bg);
-  color: var(--color-status-review-text);
+  --dot: var(--status-review);
+  background: color-mix(in oklch, var(--status-review) 14%, var(--bg));
 }
 
 .approved {
-  background: var(--color-status-approved-bg);
-  color: var(--color-status-approved-text);
+  --dot: var(--status-active);
+  background: color-mix(in oklch, var(--status-active) 12%, var(--bg));
 }
 
 .archived {
-  background: var(--color-status-archived-bg);
-  color: var(--color-status-archived-text);
+  --dot: var(--status-archived);
+  background: color-mix(in oklch, var(--status-archived) 10%, var(--bg));
 }

@@ -7,6 +7,9 @@ function App() {
     <div className={styles.app}>
       <header className={styles.header}>
         <h1 className={styles.title}>Document Library Explorer</h1>
+        <p className={styles.subtitle}>
+          Browse, search, filter, and update status across the catalog.
+        </p>
       </header>
       <main>
         <DocumentBrowser />

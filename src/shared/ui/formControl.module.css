@@ -8,15 +8,22 @@
 .label {
   font-size: var(--font-size-sm);
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--text);
 }
 
 .control {
   font: inherit;
   font-size: var(--font-size-base);
+  /* ≥44px tall for touch; 16px base avoids iOS Safari zoom-on-focus. */
+  min-height: 44px;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  color: var(--color-text);
+  border: 1px solid var(--hairline);
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color var(--motion-fast) var(--ease);
+}
+
+.control:hover {
+  border-color: var(--text-faint);
 }
