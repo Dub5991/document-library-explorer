@@ -1,0 +1,10 @@
+.summary {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin: 0 0 var(--space-3);
+}
+
+.empty {
+  padding: var(--space-4) 0;
+  color: var(--color-text-muted);
+}
