@@ -1,3 +1,4 @@
+/* Bare reset. Real design tokens land in the TOKENS + PRIMITIVES station. */
 * {
   box-sizing: border-box;
 }
