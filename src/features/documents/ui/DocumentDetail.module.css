@@ -1,0 +1,85 @@
+/* Modal dialog layout: full-screen backdrop button behind a centered card. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  background: rgb(0 0 0 / 0.5);
+  cursor: pointer;
+}
+
+.dialog {
+  position: relative;
+  width: min(32rem, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--color-surface, #fff);
+  color: var(--color-text, #111);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 0.25);
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+
+.meta {
+  margin: 0 0 1.5rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.row dt {
+  font-weight: 600;
+  color: var(--color-text-muted, #555);
+}
+
+.row dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.statusUpdater {
+  display: grid;
+  gap: 0.375rem;
+  margin-bottom: 1.5rem;
+}
+
+.statusLabel {
+  font-weight: 600;
+}
+
+.statusSelect {
+  padding: 0.5rem;
+  border: 1px solid var(--color-border, #ccc);
+  border-radius: 4px;
+  font: inherit;
+}
+
+.statusSelect:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
